@@ -7,4 +7,4 @@ if video is not None:
   tfile = tempfile.NamedTemporaryFile(delete=False)
   tfile.write(video.read())
   subprocess.call(['ffmpeg','-i',tfile.name,'user.MOV'])
-  
+  st.video('user.MOV')
