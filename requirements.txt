@@ -1,5 +1,5 @@
 mediapipe
 streamlit
 matplotlib
-pandas
+pandas==1.3
 scipy
