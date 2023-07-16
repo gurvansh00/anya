@@ -10,18 +10,12 @@ import matplotlib.pyplot as plt
 st.title('Trackmen')
 joints = [pm.SHOULDER_RIGHT,pm.HIP_RIGHT,pm.KNEE_RIGHT,pm.ANKLE_RIGHT,pm.ELBOW_RIGHT]
 limbs = [pm.ARM_LOWER_RIGHT,pm.ARM_UPPER_RIGHT,pm.UPPER_BODY_RIGHT,pm.LEG_UPPER_RIGHT,pm.LEG_LOWER_RIGHT, pm.FOOT_RIGHT]
-
-video = st.file_uploader('upload your video')
-
-if video is not None:
-  tfile = tempfile.NamedTemporaryFile(delete=False)
-  tfile.write(video.read())
-  subprocess.call(['ffmpeg','-i',tfile.name,'user.MOV'])
-  st.write('done')
-  st.video('user.MOV')
-  pm.pipeline(path = 'user.MOV', output_name = 'user', joints=joints,limbs=limbs, out_frame_rate=12)
-  st.video('Videos/user.avi')
-  '''def displayPDF(file):
+def analyze_multiple_players(names):
+    for name in names:
+        path = name + '.MOV'
+        pm.pipeline(path = path, output_name = name, joints=joints,limbs=limbs, out_frame_rate=12)
+players2 = ['user']
+def displayPDF(file):
     # Opening file from file path
     with open(file, "rb") as f:
         base64_pdf = base64.b64encode(f.read()).decode('utf-8')
@@ -31,4 +25,15 @@ if video is not None:
 
     # Displaying File
     st.markdown(pdf_display, unsafe_allow_html=True)
-  displayPDF('Graphs/user.pdf')'''
+  
+video = st.file_uploader('upload your video')
+
+if video is not None:
+  tfile = tempfile.NamedTemporaryFile(delete=False)
+  tfile.write(video.read())
+  subprocess.call(['ffmpeg','-i',tfile.name,'user.MOV'])
+  st.write('done')
+  st.video('user.MOV')
+  analyze_multiple_players(players2)
+  st.video('Videos/user.avi')
+  displayPDF('Graphs/user.pdf')
