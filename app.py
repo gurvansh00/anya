@@ -21,7 +21,7 @@ if video is not None:
   st.video('user.MOV')
   pm.pipeline(path = 'user.MOV', output_name = 'user', joints=joints,limbs=limbs, out_frame_rate=12)
   st.video('Videos/user.avi')
-  def displayPDF(file):
+  '''def displayPDF(file):
     # Opening file from file path
     with open(file, "rb") as f:
         base64_pdf = base64.b64encode(f.read()).decode('utf-8')
@@ -31,4 +31,4 @@ if video is not None:
 
     # Displaying File
     st.markdown(pdf_display, unsafe_allow_html=True)
-  displayPDF('Graphs/user.pdf')
+  displayPDF('Graphs/user.pdf')'''
