@@ -11,7 +11,7 @@ st.title('Trackmen')
 joints = [pm.SHOULDER_RIGHT,pm.HIP_RIGHT,pm.KNEE_RIGHT,pm.ANKLE_RIGHT,pm.ELBOW_RIGHT]
 limbs = [pm.ARM_LOWER_RIGHT,pm.ARM_UPPER_RIGHT,pm.UPPER_BODY_RIGHT,pm.LEG_UPPER_RIGHT,pm.LEG_LOWER_RIGHT, pm.FOOT_RIGHT]
 
-video = st.file_uploader('upload your video',type=['mp4','mpeg4','avi'])
+video = st.file_uploader('upload your video')
 
 if video is not None:
   tfile = tempfile.NamedTemporaryFile(delete=False)
