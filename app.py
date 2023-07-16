@@ -17,3 +17,4 @@ if video is not None:
   subprocess.call(['ffmpeg','-i',tfile.name,'user.MOV'])
   st.write('done')
   st.video('user.MOV')
+  pm.pipeline(path = path, output_name = name, joints=joints,limbs=limbs, out_frame_rate=12)
