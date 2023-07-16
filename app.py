@@ -17,4 +17,16 @@ if video is not None:
   subprocess.call(['ffmpeg','-i',tfile.name,'user.MOV'])
   st.write('done')
   st.video('user.MOV')
-  pm.pipeline(path = path, output_name = name, joints=joints,limbs=limbs, out_frame_rate=12)
+  pm.pipeline(path = 'user.MOV', output_name = 'user', joints=joints,limbs=limbs, out_frame_rate=12)
+  st.video('Videos/user.avi')
+  def displayPDF(file):
+    # Opening file from file path
+    with open(file, "rb") as f:
+        base64_pdf = base64.b64encode(f.read()).decode('utf-8')
+
+    # Embedding PDF in HTML
+    pdf_display = F'<embed src="data:application/pdf;base64,{base64_pdf}" width="700" height="1000" type="application/pdf">'
+
+    # Displaying File
+    st.markdown(pdf_display, unsafe_allow_html=True)
+  displayPDF('Graphs/user.pdf')
