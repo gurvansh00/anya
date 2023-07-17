@@ -13,10 +13,8 @@ joints = [pm.SHOULDER_RIGHT,pm.HIP_RIGHT,pm.KNEE_RIGHT,pm.ANKLE_RIGHT,pm.ELBOW_R
 limbs = [pm.ARM_LOWER_RIGHT,pm.ARM_UPPER_RIGHT,pm.UPPER_BODY_RIGHT,pm.LEG_UPPER_RIGHT,pm.LEG_LOWER_RIGHT, pm.FOOT_RIGHT]
 players2 = ['user']
 def analyze_multiple_players(names):
-    for name in names:
-        path = name + '.MOV'
-        st.video(path)
-        pm.pipeline(path = path, output_name = name, joints=joints,limbs=limbs, out_frame_rate=12)
+    st.video(tfile.name)
+    pm.pipeline(path = tfile.name, output_name = user, joints=joints,limbs=limbs, out_frame_rate=12)
 def displayPDF(file):
     # Opening file from file path
     with open(file, "rb") as f:
