@@ -8,10 +8,10 @@ import matplotlib.pyplot as plt
 import base64
 import pandas as pd
 from scipy.signal import savgol_filter
-
+import os
 from constants import *
 
-
+os.remove('user.Mov')
 class Analyzer():
 
 
@@ -99,15 +99,9 @@ class Analyzer():
             row = {i: clean_position[i] for i in range(33)}
             row = pd.DataFrame(row)
             positions = pd.concat([positions,row],ignore_index=True)
-            st.write(positions)
-            #positions = positions.append(row, ignore_index=True)
-
         return
     
-
-
     # Functions for analyzing the body mechanics
-
 
     def angle_horizontal(self, joints):
         # Return the angle of a limb w.r.t the x-axis
@@ -123,16 +117,6 @@ class Analyzer():
     def angle_between(self,joint):
         assert len(joint) == 3
         (left, mid, right) = joint
-        st.write(joint)
-
-        '''
-        # Version 1
-        angle_1 = self.angle_horizontal((mid,left))
-        angle_2 = self.angle_horizontal((mid,right))
-        return savgol_filter(np.abs(angle_1 - angle_2),7,2)
-
-        '''
-        
         joint_left = np.concatenate([self.all_positions[left].apply(lambda x: np.array(x))]).reshape(-1,2)
         joint_mid = np.concatenate([self.all_positions[mid].apply(lambda x: np.array(x))]).reshape(-1,2)
         joint_right = np.concatenate([self.all_positions[right].apply(lambda x: np.array(x))]).reshape(-1,2)
@@ -251,7 +235,6 @@ class Analyzer():
         # Wrap all preliminary analysis 
         self.path = path
         cap = cv2.VideoCapture(path)
-        st.write(cap.isOpened())
         self.width = int(cap.get(3))
         self.height = int(cap.get(4))
         self.framerate = cap.get(cv2.CAP_PROP_FPS)
@@ -301,8 +284,7 @@ class Analyzer():
 
     def output_video(self,name = 'output', limbs = [LEG_LOWER_RIGHT, LEG_UPPER_RIGHT, UPPER_BODY_RIGHT], out_frame_rate = 12):
 
-        #cap = cv2.VideoCapture(self.path)
-        cap = open(path,'rb')
+        cap = cv2.VideoCapture(self.path)
         t = 0 # counting frames            
         outpath = name + '.mp4'
         out = cv2.VideoWriter(outpath,cv2.VideoWriter_fourcc('M','J','P','G'), out_frame_rate, (self.width,self.height))
@@ -397,20 +379,10 @@ class Analyzer():
         fig.savefig((name + '.pdf'))
         return fig
 
-
-
-
-            
-
-def pipeline(path,output_name = 'analysis', joints = [KNEE_RIGHT,HIP_RIGHT], limbs = [LEG_LOWER_RIGHT, LEG_UPPER_RIGHT, UPPER_BODY_RIGHT],out_frame_rate = 12):
-    detector = Analyzer()
-    detector.analyze(path,joints)
-    detector.output_video(name = output_name, limbs = limbs, out_frame_rate = out_frame_rate)
-    detector.output_graph(name = output_name)
     
 st.title('Trackmen')
-#joints = [pm.SHOULDER_RIGHT,pm.HIP_RIGHT,pm.KNEE_RIGHT,pm.ANKLE_RIGHT,pm.ELBOW_RIGHT]
-#limbs = [pm.ARM_LOWER_RIGHT,pm.ARM_UPPER_RIGHT,pm.UPPER_BODY_RIGHT,pm.LEG_UPPER_RIGHT,pm.LEG_LOWER_RIGHT, pm.FOOT_RIGHT]
+joints = [SHOULDER_RIGHT,HIP_RIGHT,KNEE_RIGHT,ANKLE_RIGHT,ELBOW_RIGHT]
+limbs = [ARM_LOWER_RIGHT,ARM_UPPER_RIGHT,UPPER_BODY_RIGHT,LEG_UPPER_RIGHT,LEG_LOWER_RIGHT, FOOT_RIGHT]
   
 video = st.file_uploader('upload your video')
 analyzer = Analyzer()
@@ -418,11 +390,12 @@ if video is not None:
     tfile = tempfile.NamedTemporaryFile(delete=False)
     tfile.write(video.read())
     subprocess.call(['ffmpeg','-i',tfile.name,'user.MOV'])
-    st.write('done') 
+    st.write('Video Conversion Done')
     path = tfile.name
-    joints = [SHOULDER_RIGHT,HIP_RIGHT,KNEE_RIGHT,ANKLE_RIGHT,ELBOW_RIGHT]
     analyzer.analyze(path,joints)
     st.write('Overall Score: ',analyzer.score_motion())
     st.write(analyzer.give_suggestions())
+    analyzer.output_video(name = 'user', limbs = limbs, out_frame_rate = 12)
+    st.video('user.mp4')
     st.pyplot(analyzer.output_graph())
-    #pipeline(path = tfile.name, output_name = 'user', joints=joints,limbs=limbs, out_frame_rate=12)
+    os.remove('user.mov')
