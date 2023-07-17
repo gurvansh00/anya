@@ -246,7 +246,7 @@ class Analyzer():
         # Wrap all preliminary analysis 
         self.path = path
         cap = cv2.VideoCapture(path)
-
+        print('cap.isOpened())
         self.width = int(cap.get(3))
         self.height = int(cap.get(4))
         self.framerate = cap.get(cv2.CAP_PROP_FPS)
