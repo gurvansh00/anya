@@ -6,6 +6,7 @@ import AnalyzerModule as pm
 import numpy as np
 import mediapipe as mp
 import matplotlib.pyplot as plt
+import base64
 
 st.title('Trackmen')
 joints = [pm.SHOULDER_RIGHT,pm.HIP_RIGHT,pm.KNEE_RIGHT,pm.ANKLE_RIGHT,pm.ELBOW_RIGHT]
