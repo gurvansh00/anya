@@ -308,7 +308,7 @@ class Analyzer():
         t = 0 # counting frames
 
             
-        outpath = name + '.avi'
+        outpath = name + '.mp4'
         out = cv2.VideoWriter(outpath,cv2.VideoWriter_fourcc('M','J','P','G'), out_frame_rate, (self.width,self.height))
 
         while True:
