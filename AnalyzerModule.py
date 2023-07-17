@@ -299,6 +299,7 @@ class Analyzer():
 
         #cap = cv2.VideoCapture(self.path)
         cap = open(path,'rb')
+        st.video(cap)
         t = 0 # counting frames            
         outpath = name + '.mp4'
         out = cv2.VideoWriter(outpath,cv2.VideoWriter_fourcc('M','J','P','G'), out_frame_rate, (self.width,self.height))
