@@ -11,8 +11,7 @@ import base64
 st.title('Trackmen')
 joints = [pm.SHOULDER_RIGHT,pm.HIP_RIGHT,pm.KNEE_RIGHT,pm.ANKLE_RIGHT,pm.ELBOW_RIGHT]
 limbs = [pm.ARM_LOWER_RIGHT,pm.ARM_UPPER_RIGHT,pm.UPPER_BODY_RIGHT,pm.LEG_UPPER_RIGHT,pm.LEG_LOWER_RIGHT, pm.FOOT_RIGHT]
-players2 = ['user']
-def analyze_multiple_players(names):
+def analyze_multiple_players():
     st.video(tfile.name)
     pm.pipeline(path = tfile.name, output_name = 'user', joints=joints,limbs=limbs, out_frame_rate=12)
 def displayPDF(file):
@@ -31,8 +30,8 @@ video = st.file_uploader('upload your video')
 if video is not None:
   tfile = tempfile.NamedTemporaryFile(delete=False)
   tfile.write(video.read())
-  #subprocess.call(['ffmpeg','-i',tfile.name,'user.MOV'])
+  subprocess.call(['ffmpeg','-i',tfile.name,'user.MOV'])
   st.write('done')
-  #analyze_multiple_players(players2)
-  #st.video('user.avi')
-  displayPDF('user.pdf')
+  analyze_multiple_players()
+  st.video('user.avi')
+  #displayPDF('user.pdf')
