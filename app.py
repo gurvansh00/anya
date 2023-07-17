@@ -206,7 +206,7 @@ class Analyzer():
         (a, b) = joints
         a_coordinates = self.all_positions.iloc[t][a]
         b_coordinates = self.all_positions.iloc[t][b]
-        #print(a_coordinates)
+        st.write(a_coordinates)
         return cv2.line(img,a_coordinates,b_coordinates,color=color,thickness=10)
 
 
