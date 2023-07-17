@@ -255,7 +255,6 @@ class Analyzer():
         self.width = int(cap.get(3))
         self.height = int(cap.get(4))
         self.framerate = cap.get(cv2.CAP_PROP_FPS)
-        st.video(cap)
 
         self.find_all_positions(cap)
 
