@@ -308,7 +308,7 @@ class Analyzer():
         t = 0 # counting frames
 
             
-        outpath = 'Videos/' + name + '.avi'
+        outpath = name + '.avi'
         out = cv2.VideoWriter(outpath,cv2.VideoWriter_fourcc('M','J','P','G'), out_frame_rate, (self.width,self.height))
 
         while True:
@@ -398,7 +398,7 @@ class Analyzer():
 
         fig.text(0.2, 0.47, 'Overall Score: ' + str(self.score_motion()), horizontalalignment='left',verticalalignment='center',fontsize = 15, family = 'sans-serif', color = 'red')
         fig.text(0.2, 0.4,self.give_suggestions(),horizontalalignment='left',verticalalignment='center',fontsize = 12, family = 'sans-serif',color = 'blue')
-        fig.savefig(('Graphs/' + name + '.pdf'))
+        fig.savefig((name + '.pdf'))
 
         return fig
 
