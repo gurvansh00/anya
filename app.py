@@ -133,9 +133,9 @@ class Analyzer():
 
         '''
         
-        joint_left = np.concatenate(self.all_positions[left].apply(lambda x: np.array(x))).reshape(-1,2)
-        joint_mid = np.concatenate(self.all_positions[mid].apply(lambda x: np.array(x))).reshape(-1,2)
-        joint_right = np.concatenate(self.all_positions[right].apply(lambda x: np.array(x))).reshape(-1,2)
+        joint_left = np.concatenate([self.all_positions[left].apply(lambda x: np.array(x))]).reshape(-1,2)
+        joint_mid = np.concatenate([self.all_positions[mid].apply(lambda x: np.array(x))]).reshape(-1,2)
+        joint_right = np.concatenate([self.all_positions[right].apply(lambda x: np.array(x))]).reshape(-1,2)
 
         l = joint_left - joint_mid
         r = joint_mid - joint_right
