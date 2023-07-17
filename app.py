@@ -413,7 +413,7 @@ st.title('Trackmen')
 #limbs = [pm.ARM_LOWER_RIGHT,pm.ARM_UPPER_RIGHT,pm.UPPER_BODY_RIGHT,pm.LEG_UPPER_RIGHT,pm.LEG_LOWER_RIGHT, pm.FOOT_RIGHT]
   
 video = st.file_uploader('upload your video')
-
+analyzer = Analyzer()
 if video is not None:
     tfile = tempfile.NamedTemporaryFile(delete=False)
     tfile.write(video.read())
