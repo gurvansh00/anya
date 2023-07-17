@@ -94,6 +94,7 @@ class Analyzer():
             raw_position = self.findPosition(img, draw=False)
             clean_position = [(pos[1], pos[2])for pos in raw_position]
             row = {i: clean_position[i] for i in range(33)}
+            row = pd.DataFrame(row)
             positions = pd.concat([positions,row],ignore_index=True)
             #positions = positions.append(row, ignore_index=True)
 
