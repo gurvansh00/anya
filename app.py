@@ -203,7 +203,7 @@ class Analyzer():
 
 
     def connect_joints(self,img,joints,t,color):
-        (a, b) = joints
+        a, b = joints[0],joints[1]
         a_coordinates = self.all_positions.iloc[t][a]
         b_coordinates = self.all_positions.iloc[t][b]
         st.write(a_coordinates)
