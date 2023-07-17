@@ -36,5 +36,5 @@ if video is not None:
   subprocess.call(['ffmpeg','-i',tfile.name,'user.MOV'])
   st.write('done')
   #analyze_multiple_players(players2)
-  st.video('/Videos/user.avi')
-  displayPDF('/Graphs/user.pdf')
+  st.video('~/Videos/user.avi')
+  displayPDF('~/Graphs/user.pdf')
