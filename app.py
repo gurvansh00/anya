@@ -11,7 +11,7 @@ from scipy.signal import savgol_filter
 import os
 from constants import *
 
-os.remove('user.Mov')
+
 class Analyzer():
 
 
