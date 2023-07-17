@@ -115,7 +115,7 @@ class Analyzer():
         joint_a = self.all_positions[a].apply(lambda x: np.array(x))
         joint_b = self.all_positions[b].apply(lambda x: np.array(x))
         diff = joint_a - joint_b
-        diff = np.concatenate(diff).reshape(-1,2)
+        diff = np.concatenate([diff]).reshape(-1,2)
 
         return savgol_filter(np.arctan2(-diff[:,1],diff[:,0]) * 180 / np.pi,5,2)
 
@@ -155,7 +155,7 @@ class Analyzer():
 
 
     def compute_v_a(self,joint):
-        positions = np.concatenate(self.all_positions[joint].apply(lambda x: np.array(x))).reshape(-1,2)
+        positions = np.concatenate([self.all_positions[joint].apply(lambda x: np.array(x))]).reshape(-1,2)
         x = savgol_filter(positions[:,0],7,2)
         y = savgol_filter(positions[:,1],7,2)
 
@@ -180,9 +180,9 @@ class Analyzer():
 
 
     def estimate_body_size(self):
-        shoulder = np.concatenate(self.all_positions[12].apply(lambda x: np.array(x))).reshape(-1,2)
-        hip = np.concatenate(self.all_positions[24].apply(lambda x: np.array(x))).reshape(-1,2)
-        knee = np.concatenate(self.all_positions[26].apply(lambda x: np.array(x))).reshape(-1,2)
+        shoulder = np.concatenate([self.all_positions[12].apply(lambda x: np.array(x))]).reshape(-1,2)
+        hip = np.concatenate([self.all_positions[24].apply(lambda x: np.array(x))]).reshape(-1,2)
+        knee = np.concatenate([self.all_positions[26].apply(lambda x: np.array(x))]).reshape(-1,2)
 
 
         shoulder = np.concatenate([savgol_filter(shoulder[:,0],7,2),savgol_filter(shoulder[:,1],7,2)]).reshape(2,-1).T
