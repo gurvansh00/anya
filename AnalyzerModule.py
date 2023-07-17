@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from scipy.signal import savgol_filter
-
+import streamlit as st
 import cv2
 import mediapipe as mp
 
@@ -140,13 +140,6 @@ class Analyzer():
 
         omega = (np.pi - np.arccos(np.sum(l * r, axis = 1)/(lsize*rsize))) * 180 / np.pi
         return savgol_filter(omega,7,2)
-
-
-
-
-
-
-
 
 
     def compute_angular_acceleration(self,joints):
@@ -304,10 +297,9 @@ class Analyzer():
 
     def output_video(self,name = 'output', limbs = [LEG_LOWER_RIGHT, LEG_UPPER_RIGHT, UPPER_BODY_RIGHT], out_frame_rate = 12):
 
-        cap = cv2.VideoCapture(self.path)
-        t = 0 # counting frames
-
-            
+        #cap = cv2.VideoCapture(self.path)
+        cap = open(path,'rb')
+        t = 0 # counting frames            
         outpath = name + '.mp4'
         out = cv2.VideoWriter(outpath,cv2.VideoWriter_fourcc('M','J','P','G'), out_frame_rate, (self.width,self.height))
 
@@ -399,7 +391,7 @@ class Analyzer():
         fig.text(0.2, 0.47, 'Overall Score: ' + str(self.score_motion()), horizontalalignment='left',verticalalignment='center',fontsize = 15, family = 'sans-serif', color = 'red')
         fig.text(0.2, 0.4,self.give_suggestions(),horizontalalignment='left',verticalalignment='center',fontsize = 12, family = 'sans-serif',color = 'blue')
         fig.savefig((name + '.pdf'))
-
+        st.pyplot(fig)
         return fig
 
 
