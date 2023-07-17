@@ -249,7 +249,7 @@ class Analyzer():
         # Wrap all preliminary analysis 
         self.path = path
         cap = cv2.VideoCapture(path)
-        print(cap.isOpened())
+        st.write(cap.isOpened())
         self.width = int(cap.get(3))
         self.height = int(cap.get(4))
         self.framerate = cap.get(cv2.CAP_PROP_FPS)
@@ -419,7 +419,7 @@ if video is not None:
     tfile.write(video.read())
     subprocess.call(['ffmpeg','-i',tfile.name,'user.MOV'])
     st.write('done') 
-    path = 'user.MOV'
+    path = tfile.name
     joints = [SHOULDER_RIGHT,HIP_RIGHT,KNEE_RIGHT,ANKLE_RIGHT,ELBOW_RIGHT]
     analyzer.analyze(path,joints)
     st.write('Overall Score: ',analyzer.score_motion())
