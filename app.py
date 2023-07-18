@@ -204,6 +204,7 @@ class Analyzer():
 
     def connect_joints(self,img,joints,t,color):
         a, b = joints[0],joints[1]
+        st.write(a)
         a_coordinates = self.all_positions.iloc[t][a]
         b_coordinates = self.all_positions.iloc[t][b]
         st.write(a_coordinates)
@@ -398,6 +399,6 @@ if video is not None:
     st.write(analyzer.give_suggestions())
     os.remove('user.Mov')
     st.pyplot(analyzer.output_graph())
-    #analyzer.output_video(name = 'user', limbs = limbs, out_frame_rate = 12)
+    analyzer.output_video(name = 'user', limbs = limbs, out_frame_rate = 12)
     #st.video('user.mp4')
     
