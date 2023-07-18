@@ -393,7 +393,7 @@ if video is not None:
     ff.run()
     st.write('Video Conversion Done')
     path = tfile.name
-    analyzer.analyze('user.MOV',joints)
+    analyzer.analyze(tfile.name,joints)
     st.write('Overall Score: ',analyzer.score_motion())
     st.write(analyzer.give_suggestions())
     tfile.close()
