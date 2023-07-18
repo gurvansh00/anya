@@ -399,4 +399,3 @@ if video is not None:
     #analyzer.output_video(name = 'user', limbs = limbs, out_frame_rate = 12)
     #st.video('user.mp4')
     st.pyplot(analyzer.output_graph())
-    os.remove('user.mov')
