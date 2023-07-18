@@ -396,7 +396,8 @@ if video is not None:
     analyzer.analyze(tfile.name,joints)
     st.write('Overall Score: ',analyzer.score_motion())
     st.write(analyzer.give_suggestions())
-    os.remove('user.Mov)
+    os.remove('user.Mov')
+    st.pyplot(analyzer.output_graph())
     #analyzer.output_video(name = 'user', limbs = limbs, out_frame_rate = 12)
     #st.video('user.mp4')
-    st.pyplot(analyzer.output_graph())
+    
