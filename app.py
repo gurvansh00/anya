@@ -1,6 +1,6 @@
 import streamlit as st
 import tempfile
-import subprocess
+from ffmpy import FFmpeg
 import cv2
 import numpy as np
 import mediapipe as mp
@@ -389,10 +389,11 @@ analyzer = Analyzer()
 if video is not None:
     tfile = tempfile.NamedTemporaryFile(delete=False)
     tfile.write(video.read())
-    subprocess.call(['ffmpeg','-i',tfile.name,'user.MOV'])
+    ff = FFmpeg(inputs={tfile.name:None},outputs={'user.Mov':None})
+    ff.run()
     st.write('Video Conversion Done')
     path = tfile.name
-    analyzer.analyze(path,joints)
+    analyzer.analyze('user.MOV',joints)
     st.write('Overall Score: ',analyzer.score_motion())
     st.write(analyzer.give_suggestions())
     tfile.close()
